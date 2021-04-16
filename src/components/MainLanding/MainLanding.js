@@ -1,11 +1,108 @@
 import React from 'react';
-import { Grid, Typography } from '@material-ui/core';
+import { Button, Grid, MenuItem, TextField, Typography } from '@material-ui/core';
 import s from './MainLanding.module.css'
 import Tost from './../../img/Landing/Tost.svg'
 import Pattern from './../../img/Landing/pattern.png'
 import MyButton from '../../UI/Button/MyButton';
-
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 const MainLanding = () => {
+  const [open, setOpen] = React.useState(false);
+  const [questions, setQuestions] = React.useState(1);
+  const [answers, setAnswers] = React.useState(1);
+  const [nameOfTest, setNameOfTest] = React.useState(null)
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleChangeQuestions = (event) => {
+    setQuestions(event.target.value);
+  };
+  const handleChangeAnswers = (event) => {
+    setAnswers(event.target.value);
+  };
+  console.log(questions)
+  console.log(nameOfTest)
+  console.log(answers)
+  const countofQuestions = [
+    {
+      value: 1,
+      label: 1,
+    },
+    {
+      value: 2,
+      label: 2,
+    },
+    {
+      value: 3,
+      label: 3,
+    },
+    {
+      value: 4,
+      label: 4,
+    },
+    {
+      value: 5,
+      label: 5,
+    },
+    {
+      value: 6,
+      label: 6,
+    },
+    {
+      value: 7,
+      label: 7,
+    },
+    {
+      value: 8,
+      label: 8,
+    },
+    {
+      value: 9,
+      label: 9,
+    },
+    {
+      value: 10,
+      label: 10,
+    },
+    {
+      value: 11,
+      label: 11,
+    },
+    {
+      value: 12,
+      label: 12,
+    },
+  ];
+  const countofAnswers = [
+    {
+      value: 1,
+      label: 1,
+    },
+    {
+      value: 2,
+      label: 2,
+    },
+    {
+      value: 3,
+      label: 3,
+    },
+    {
+      value: 4,
+      label: 4,
+    },
+    {
+      value: 5,
+      label: 5,
+    },
+  ];
   return (
     <Grid item container direction="column" className={s.MainLanding} alignItems="center">
       <Grid item className={s.TostText} >
@@ -20,12 +117,65 @@ const MainLanding = () => {
           натисни на шаблон тесту:
         </Typography>
       </Grid>
-      <Grid item className={s.Pattern}>
+      <Grid item className={s.Pattern} onClick={handleClickOpen}>
         <img src={Pattern} alt="pattern" />
       </Grid>
-      <Grid item style={{marginTop:'25px'}}>
+      <Grid item style={{ marginTop: '25px' }}>
         <MyButton name="завантажити" onClick=""></MyButton>
       </Grid>
+
+
+      {/* dialog */}
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">Конструктор питань</DialogTitle>
+        <DialogContent>
+          <Grid item container direction="column">
+            <Grid item style={{ margin: '5px 0' }}><TextField label="Назва тесту" variant="standard" onChange={event=>setNameOfTest(event.target.value)}/></Grid>
+            <Grid item style={{ margin: '5px 0' }}>
+              <TextField
+                id="standard-select-countofQuestions"
+                select
+                label="Кількість запитань"
+                value={questions}
+                onChange={handleChangeQuestions}
+                helperText="Будьласка, виберте кількість запитань"
+              >
+                {countofQuestions.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </TextField>
+            </Grid>
+            <Grid item style={{ margin: '5px 0' }}>
+              <TextField
+                id="standard-select-countofQuestions"
+                select
+                label="Кількість відповідей"
+                value={answers}
+                onChange={handleChangeAnswers}
+                helperText="Будьласка, виберте кількість відповідей"
+              >
+                {countofAnswers.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </TextField>
+            </Grid>
+          </Grid>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary" autoFocus>
+            Ok
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Grid>
   )
 
