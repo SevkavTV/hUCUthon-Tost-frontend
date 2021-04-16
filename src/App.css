@@ -8,7 +8,22 @@
 }
 
 @font-face {
-  font-family: "HelveticaNeue"; 
-  src: url("./img//fonts/HelveticaNeue.ttf") format("truetype"); 
+  font-family: "HelveticaLight"; 
+  src: url("./fonts/HelveticaNeueLight.ttf") format("truetype"); 
+  font-style: normal; 
+  } 
+  @font-face {
+    font-family: "HelveticaRegular"; 
+    src: url("./fonts/HelveticaNeueRoman.ttf") format("truetype"); 
+    font-style: normal; 
+  } 
+  @font-face {
+    font-family: "HelveticaMedium"; 
+    src: url("./fonts/HelveticaNeueMedium.ttf") format("truetype"); 
+    font-style: normal; 
+  } 
+  @font-face {
+  font-family: "HelveticaBold"; 
+  src: url("./fonts/HelveticaNeueBold.ttf") format("truetype"); 
   font-style: normal; 
   } 

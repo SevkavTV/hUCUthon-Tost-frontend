@@ -5,7 +5,7 @@ import Register from './screens/Landing/Register/Register';
 function App() {
   return (
     <div className="App">
-      <Register />
+      <Landing />
     </div>
   );
 }
