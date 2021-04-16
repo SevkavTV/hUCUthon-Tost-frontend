@@ -6,7 +6,7 @@ import s from './Landing.module.css'
 const Landing = () =>{
   return(
     <div className={s.Landing}>
-     
+      Landing
     </div>
   )
   
