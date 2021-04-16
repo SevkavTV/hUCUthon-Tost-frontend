@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import ThemeProvider from './Provider/ThemeProvider'
+
 import UserProvider from "./providers/UserProvider";
 import { BrowserRouter } from 'react-router-dom'
 import firebase from "firebase/app";
@@ -19,11 +21,13 @@ firebase.initializeApp({
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <UserProvider>
-        <App />
-      </UserProvider>
-    </BrowserRouter>
+    <ThemeProvider>
+      <BrowserRouter>
+        <UserProvider>
+          <App />
+        </UserProvider>
+      </BrowserRouter>
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

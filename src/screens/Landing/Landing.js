@@ -1,13 +1,16 @@
 import { Grid } from '@material-ui/core';
 import React from 'react';
+import Header from '../../components/Header/Header';
+import MainLanding from '../../components/MainLanding/MainLanding';
 import s from './Landing.module.css'
 
 
 const Landing = () =>{
   return(
-    <div className={s.Landing}>
-      Landing
-    </div>
+    <Grid container direction="column" className={s.Landing}>
+      <Header />
+      <MainLanding />
+    </Grid>
   )
   
 }
