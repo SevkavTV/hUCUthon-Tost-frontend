@@ -83,7 +83,7 @@ const Results = (props) => {
                     images.map((item) => {
                         return(
                             <div>
-                                <img src={item['url']}/>
+                                <img src={item['url']}/>    
                             </div>
                         )
                     })
