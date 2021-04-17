@@ -38,7 +38,7 @@ const CheckBoxBuilder = (props) => {
                   <Typography variant="body1">{index + 1}</Typography>
                 </Grid>
                 {Array.apply(null, { length: countOfAnswers }).map(elem => {
-                  return <Checkbox />
+                  return <Checkbox/>
                 })}
               </Grid>
             </>
@@ -48,7 +48,6 @@ const CheckBoxBuilder = (props) => {
       <ReactToPrint
         trigger={() => <MyButton name="Роздрукувати"></MyButton>}
         content={() => componentRef.current}
-        pageStyle="А4"
       />
     </Grid>
 
