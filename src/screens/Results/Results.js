@@ -11,14 +11,14 @@ const Results = (props) => {
     console.log(props.location.state.data)
     const handleImages = (event) => {
         console.log(event.target.files)
-        let files = event.target.files
-        let photos = []
-        Array.from(files).forEach((file) => {
-            photos.push(file)
-        })
+        let files = event.target.files        
 
         let data = new FormData();
-        data.append('photos', photos)
+        let i = 0;
+        Array.from(files).forEach((file) => {
+            data.append('photo' + i, file)
+            i++;
+        })
         data.append('uid', firebase.auth().currentUser.uid);
         data.append('pattern', props.location.state.data);
 
