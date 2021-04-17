@@ -1,14 +1,16 @@
 import { Grid, CircularProgress, Input, Checkbox, Typography, Button } from '@material-ui/core';
-import React from 'react';
+import React, { useState }from 'react';
 import Header from '../../components/Header/Header';
 import FormData from 'form-data'
 import firebase from "firebase/app";
 import 'firebase/auth'
+import 'firebase/storage'
 import { calculateResults } from '../../services/requests'
 
 
 const Results = (props) => {
-    console.log(props.location.state.data)
+    const [images, setImages] = useState(undefined)
+    let storageRef = firebase.storage().ref();
     let ABC = ['А', 'Б', 'В', 'Г', 'Д']
 
     let answers = {}
@@ -16,7 +18,13 @@ const Results = (props) => {
         answers[item['question']] = item['correctAnswer']
     }
 
-    const handleImages = (event) => {
+    let answersList = []
+    for (let item of props.location.state.data.data) {
+        answersList.push(item['correctAnswer'] - 1)
+    }
+
+
+    const handleImages = async(event) => {
         console.log(event.target.files)
         let files = event.target.files
 
@@ -27,11 +35,17 @@ const Results = (props) => {
             i++;
         })
         data.append('uid', firebase.auth().currentUser.uid);
-        data.append('pattern', props.location.state.data);
+        data.append('columns', props.location.state.data.answersNumber);
+        data.append('answers', answersList);
 
-        calculateResults(data).then((res) => {
-            console.log(res)
-        })
+        let res = await calculateResults(data)
+        let urls = []
+        for(let item of res){
+            let url = await storageRef.child(item[0]).getDownloadURL();
+            urls.push({url, result: item[1]})
+        }
+        
+        setImages(urls)
     }
     return (
         <Grid container direction="column">
@@ -64,6 +78,18 @@ const Results = (props) => {
             <Grid item container direction="row" justify="center" style={{marginTop:'30px'}}>
                 <label htmlFor="contained-button-file"><Button variant="contained" style={{ backgroundColor: 'black', color: 'white' }} component="span">Upload</Button></label>
             </Grid>
+            {
+                images ?
+                    images.map((item) => {
+                        return(
+                            <div>
+                                <img src={item['url']}/>
+                            </div>
+                        )
+                    })
+                    :
+                    null
+            }
         </Grid>
     )
 
