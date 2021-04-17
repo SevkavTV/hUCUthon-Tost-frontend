@@ -4,6 +4,7 @@ import { createMuiTheme, withStyles, makeStyles, ThemeProvider } from '@material
 
 const MyStyledButton = withStyles({
   root: {
+    width:'200px',
     textTransform: 'none',
     padding: '8px 25px',
     fontWeight: 'bold',

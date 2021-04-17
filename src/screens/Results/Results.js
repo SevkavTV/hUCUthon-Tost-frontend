@@ -1,4 +1,4 @@
-import { Grid, CircularProgress, Input, Checkbox, Typography } from '@material-ui/core';
+import { Grid, CircularProgress, Input, Checkbox, Typography, Button } from '@material-ui/core';
 import React from 'react';
 import Header from '../../components/Header/Header';
 import FormData from 'form-data'
@@ -12,13 +12,13 @@ const Results = (props) => {
     let ABC = ['А', 'Б', 'В', 'Г', 'Д']
 
     let answers = {}
-    for (let item of props.location.state.data.data){
+    for (let item of props.location.state.data.data) {
         answers[item['question']] = item['correctAnswer']
     }
 
     const handleImages = (event) => {
         console.log(event.target.files)
-        let files = event.target.files        
+        let files = event.target.files
 
         let data = new FormData();
         let i = 0;
@@ -48,7 +48,7 @@ const Results = (props) => {
                             <Typography variant="body1">{indexQuestion + 1}</Typography>
                         </Grid>
                         {Array.apply(null, { length: props.location.state.data.answersNumber }).map((elem, indexAnswer) => {
-                            return <Checkbox disabled={true} checked={answers[indexQuestion+1] === indexAnswer+1}  />
+                            return <Checkbox disabled={true} checked={answers[indexQuestion + 1] === indexAnswer + 1} />
                         })}
                     </Grid>
                 </>
@@ -56,10 +56,14 @@ const Results = (props) => {
             <input
                 accept="image/*"
                 id="contained-button-file"
-                type="file"
-                onChange={(event) => handleImages(event)}
                 multiple
+                type="file"
+                style={{ display: 'none' }}
+                onChange={(event) => handleImages(event)}
             />
+            <Grid item container direction="row" justify="center" style={{marginTop:'30px'}}>
+                <label htmlFor="contained-button-file"><Button variant="contained" style={{ backgroundColor: 'black', color: 'white' }} component="span">Upload</Button></label>
+            </Grid>
         </Grid>
     )
 

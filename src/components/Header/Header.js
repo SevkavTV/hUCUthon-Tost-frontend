@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { getUserInfo } from '../../services/requests'
 import firebase from "firebase/app";
 import 'firebase/auth'
-
+import {signOut} from '../../services/auth'
 const Header = (props) => {
   const [userInfo, setUserInfo] = useState(undefined)
 
@@ -19,24 +19,23 @@ const Header = (props) => {
   return (
     <Grid item container direction="column" className={s.Header}>
       <Grid item container direction="row" alignItems="center" justify="space-between">
-        <Link to='/choose_template'>
-          <Grid item style={{ width: '71px' }}>
-            <Typography variant="subtitle1">перевірити</Typography>
-          </Grid>
-        </Link>
+
         <Link to='/'>
-          <Grid item>
+          <Grid item className={s.imgWrapper}>
             <img src={TostLogo} alt="Tost" />
           </Grid>
-        </Link>     
-        <Grid item style={{ width: '71px' }}>
-          <Typography variant="subtitle1">{userInfo ? userInfo.name + ' ' + userInfo.surname : null}</Typography>
+        </Link>
+        <Grid xs item container direction="row" justify="flex-end">
+
+          <Link to='/choose_template' style={{ textDecoration: 'none' }}>
+            <Grid item style={{ marginRight: '10px' }}>
+              <Typography variant="subtitle1">перевірити</Typography>
+            </Grid>
+          </Link>
+          <Grid item onClick={signOut}>
+              <Typography variant="subtitle1">вийти</Typography>
+          </Grid>
         </Grid>
-      </Grid>
-      <Grid item container direction="row" justify="center">
-        <div className={s.imgWrapper}>
-          <img src={Tost} alt="Tost" />
-        </div>
       </Grid>
     </Grid>
   )

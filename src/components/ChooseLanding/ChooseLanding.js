@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 const ChooseLanding = () => {
   const [patterns, setPatterns] = useState(undefined)
 
-  if(!patterns){
+  if (!patterns) {
     getPatterns(firebase.auth().currentUser.uid).then((patterns) => {
       console.log(patterns)
       setPatterns(patterns)
@@ -25,29 +25,31 @@ const ChooseLanding = () => {
       </Grid>
       {
         patterns ?
-            patterns.map((item) => {
-              return(
-                <Link to={{
-                  pathname: '/results',
-                  state: {
-                    data: item
-                  }
-                }}>
-                  <Grid item style={{ paddingTop: '30px' }}>
+          patterns.map((item) => {
+            return (
+              <Link to={{
+                pathname: '/results',
+                state: {
+                  data: item
+                }
+              }} style={{textDecoration: 'none' }}>
+                <Grid item container direction="row" justify="center" style={{ marginTop: '30px', marginBottom:'20px' }}>
+                  <Grid item>
                     <Typography variant="body1">
-                        {item.name}
+                      {item.name}
                     </Typography>
                   </Grid>
-                  <Grid item className={s.Pattern}>
-                    <img src={Pattern} alt="pattern" />
-                  </Grid>
-                </Link>
-              )
-            })
+                </Grid>
+                <Grid item className={s.Pattern} >
+                  <img src={Pattern} alt="pattern" />
+                </Grid>
+              </Link>
+            )
+          })
           :
           <CircularProgress />
       }
-      
+
     </Grid>
   )
 
