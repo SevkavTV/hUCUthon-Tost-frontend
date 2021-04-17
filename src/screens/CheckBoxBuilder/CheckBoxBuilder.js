@@ -5,8 +5,14 @@ import ReactToPrint from 'react-to-print';
 import MyButton from '../../UI/Button/MyButton';
 import s from './CheckBoxBuilder.module.css'
 import ComponentToPrint from '../../components/ComponentToPrint/ComponentToPrint'
+import firebase from "firebase/app";
+import 'firebase/auth'
+import { createPattern } from '../../services/requests'
+ 
 const CheckBoxBuilder = (props) => {
   const componentRef = React.useRef();
+
+
   let countOfQuestions = null
   let countOfAnswers = null
   let nameOfTest = ""
@@ -29,6 +35,36 @@ const CheckBoxBuilder = (props) => {
       setCheckBoxes(currCheckBoxes)
     }
   }
+
+  const saveTest = async() => {
+    const uid = firebase.auth().currentUser.uid
+    const patternId = (Math.floor(Math.random() * 1000)).toString()
+
+    let answers = []
+    for(let property in checkBoxes){
+      answers.push({
+        "question": parseInt(property),
+        "correctAnswer": checkBoxes[property]
+      })
+    }
+    let pattern = {
+      "type": 1,
+      "data": answers,
+      "name": props.location.state.nameOfTest,
+      "answersNumber": props.location.state.answers
+    }
+
+    const params = {
+      "uid": uid,
+      "pattern_id": patternId,
+      "pattern": pattern
+    }
+
+    console.log(params)
+    createPattern(params)
+
+  }
+
   console.log(checkBoxes)
   console.log(props.location.state)
   return (
@@ -47,6 +83,7 @@ const CheckBoxBuilder = (props) => {
         <ReactToPrint
           trigger={() => <MyButton name="роздрукувати"></MyButton>}
           content={() => componentRef.current}
+          onAfterPrint={() => saveTest()}
         />
       </Grid>
     </Grid>

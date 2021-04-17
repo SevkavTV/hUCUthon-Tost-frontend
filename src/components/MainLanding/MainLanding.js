@@ -100,18 +100,15 @@ const MainLanding = () => {
           </div>
          - твій помічник в перевірці тестів</Typography>
       </Grid>
-      <Grid item style={{ paddingTop: '30px' }}>
+      <Grid item style={{ paddingTop: '30px', marginBottom: '30px' }}>
         <Typography variant="body1">
           натисни на шаблон тесту:
         </Typography>
       </Grid>
-      <Grid item className={s.Pattern} onClick={handleClickOpen}>
+      <Grid item className={s.Pattern} onClick={handleClickOpen} style={{marginBottom:'10px'}}>
         <img src={Pattern} alt="pattern" />
       </Grid>
-      <Grid item style={{ marginTop: '25px' }}>
-        <MyButton name="завантажити" onClick=""></MyButton>
-      </Grid>
-
+      <Grid item><Typography variant="body1">1 правильна відповідь</Typography></Grid>
 
       {/* dialog */}
       <Dialog
