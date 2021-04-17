@@ -32,7 +32,7 @@ const Header = (props) => {
               <Typography variant="subtitle1">перевірити</Typography>
             </Grid>
           </Link>
-          <Grid item onClick={signOut}>
+          <Grid item onClick={signOut} style={{cursor: 'pointer'}}>
               <Typography variant="subtitle1">вийти</Typography>
           </Grid>
         </Grid>
