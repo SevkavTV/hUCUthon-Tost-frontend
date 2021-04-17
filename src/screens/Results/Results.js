@@ -82,9 +82,17 @@ const Results = (props) => {
                 images ?
                     images.map((item) => {
                         return(
+<<<<<<< HEAD
                             <div>
                                 <img src={item['url']}/>    
                             </div>
+=======
+                            <Grid container direction="column" alignItems="center" style={{marginTop:'20px'}}>
+                                <Grid item>
+                                    <img style={{width: '300px'}} src={item['url']}/>
+                                </Grid>
+                            </Grid>
+>>>>>>> 9c5050f494e8a72cf302efbc49b8a4e608bd9c2e
                         )
                     })
                     :
