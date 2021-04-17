@@ -1,4 +1,4 @@
-import { Grid, CircularProgress, Input } from '@material-ui/core';
+import { Grid, CircularProgress, Input, Checkbox, Typography } from '@material-ui/core';
 import React from 'react';
 import Header from '../../components/Header/Header';
 import FormData from 'form-data'
@@ -9,6 +9,13 @@ import { calculateResults } from '../../services/requests'
 
 const Results = (props) => {
     console.log(props.location.state.data)
+    let ABC = ['А', 'Б', 'В', 'Г', 'Д']
+
+    let answers = {}
+    for (let item of props.location.state.data.data){
+        answers[item['question']] = item['correctAnswer']
+    }
+
     const handleImages = (event) => {
         console.log(event.target.files)
         let files = event.target.files        
@@ -29,6 +36,23 @@ const Results = (props) => {
     return (
         <Grid container direction="column">
             <Header />
+            <Grid item container direction="row" justify="center">
+                {Array.apply(null, { length: props.location.state.data.answersNumber }).map((elem, index) => {
+                    return <Grid item container direction="row" justify="flex-end" style={{ width: '42px', paddingRight: '5px' }}>{ABC[index]}</Grid>
+                })}
+            </Grid>
+            {Array.apply(null, { length: props.location.state.data.data.length }).map((elem, indexQuestion) => {
+                return <>
+                    <Grid item container direction="row" alignItems="center" justify="center">
+                        <Grid item container direction="row" justify="flex-end" style={{ width: '23px' }}>
+                            <Typography variant="body1">{indexQuestion + 1}</Typography>
+                        </Grid>
+                        {Array.apply(null, { length: props.location.state.data.answersNumber }).map((elem, indexAnswer) => {
+                            return <Checkbox disabled={true} checked={answers[indexQuestion+1] === indexAnswer+1}  />
+                        })}
+                    </Grid>
+                </>
+            })}
             <input
                 accept="image/*"
                 id="contained-button-file"

@@ -50,7 +50,8 @@ const CheckBoxBuilder = (props) => {
     let pattern = {
       "type": 1,
       "data": answers,
-      "name": props.location.state.nameOfTest
+      "name": props.location.state.nameOfTest,
+      "answersNumber": props.location.state.answers
     }
 
     const params = {
