@@ -9,11 +9,14 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import CheckBoxBuilder from '../../screens/CheckBoxBuilder/CheckBoxBuilder';
+import { Link } from 'react-router-dom';
 const MainLanding = () => {
   const [open, setOpen] = React.useState(false);
-  const [questions, setQuestions] = React.useState(1);
-  const [answers, setAnswers] = React.useState(1);
   const [nameOfTest, setNameOfTest] = React.useState(null)
+  const [questions, setQuestions] = React.useState(5);
+  const [answers, setAnswers] = React.useState(5);
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -28,18 +31,7 @@ const MainLanding = () => {
   const handleChangeAnswers = (event) => {
     setAnswers(event.target.value);
   };
-  console.log(questions)
-  console.log(nameOfTest)
-  console.log(answers)
   const countofQuestions = [
-    {
-      value: 1,
-      label: 1,
-    },
-    {
-      value: 2,
-      label: 2,
-    },
     {
       value: 3,
       label: 3,
@@ -82,10 +74,6 @@ const MainLanding = () => {
     },
   ];
   const countofAnswers = [
-    {
-      value: 1,
-      label: 1,
-    },
     {
       value: 2,
       label: 2,
@@ -135,7 +123,7 @@ const MainLanding = () => {
         <DialogTitle id="alert-dialog-title">Конструктор питань</DialogTitle>
         <DialogContent>
           <Grid item container direction="column">
-            <Grid item style={{ margin: '5px 0' }}><TextField label="Назва тесту" variant="standard" onChange={event=>setNameOfTest(event.target.value)}/></Grid>
+            <Grid item style={{ margin: '5px 0' }}><TextField label="Назва тесту" variant="standard" onChange={event => setNameOfTest(event.target.value)} /></Grid>
             <Grid item style={{ margin: '5px 0' }}>
               <TextField
                 id="standard-select-countofQuestions"
@@ -171,9 +159,22 @@ const MainLanding = () => {
           </Grid>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary" autoFocus>
-            Ok
+
+          <Link
+            to={{
+              pathname: '/template',
+              state: {
+                nameOfTest,
+                questions,
+                answers,
+              }
+            }}
+            style={{ textDecoration: 'none' }}
+          >
+            <Button onClick={handleClose} color="primary" autoFocus>
+              Ok
           </Button>
+          </Link>
         </DialogActions>
       </Dialog>
     </Grid>

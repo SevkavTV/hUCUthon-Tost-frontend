@@ -7,7 +7,6 @@ import { CircularProgress } from '@material-ui/core'
 
 
 const PrivateRoute = (props) => {
-
     const user = useContext(UserContext)
     return(
         user === undefined ?
