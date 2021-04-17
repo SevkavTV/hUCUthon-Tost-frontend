@@ -1,21 +1,21 @@
 import { Grid } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import Header from '../../components/Header/Header';
-import MainLanding from '../../components/MainLanding/MainLanding';
+import ChooseLanding from '../../components/ChooseLanding/ChooseLanding';
 import s from './Landing.module.css'
 
 
 
-const Landing = () =>{
+const ChooseTemplate = () =>{
 
   return(
     <Grid container direction="column" className={s.Landing}>
       <Header />
-      <MainLanding />
+      <ChooseLanding />
     </Grid>
   )
   
 }
 
 
-export default Landing;
+export default ChooseTemplate;

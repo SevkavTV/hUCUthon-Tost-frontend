@@ -108,9 +108,6 @@ const MainLanding = () => {
       <Grid item className={s.Pattern} onClick={handleClickOpen}>
         <img src={Pattern} alt="pattern" />
       </Grid>
-      <Grid item style={{ marginTop: '25px' }}>
-        <MyButton name="завантажити" onClick=""></MyButton>
-      </Grid>
 
 
       {/* dialog */}
